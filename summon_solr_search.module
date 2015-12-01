@@ -27,7 +27,7 @@ function summon_solr_search_block_info() {
  * Implements hook_block_view(). It returns the content for the blocks we created using
  * hook_block_info().
  */
-function bento_box_search_block_view($block_name = '') {
+function summon_solr_search_block_view($block_name = '') {
   // Check which block is being requested
   if ($block_name == 'summon_solr_search_block') {
     
