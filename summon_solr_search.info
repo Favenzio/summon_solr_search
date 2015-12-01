@@ -1,0 +1,6 @@
+name = Summon Solr Search
+description = A Drupal module that helps you query and display results from solr and the Summon API.
+core = 7.x
+package = Search
+files[] = summon_solr_search.module
+stylesheets[all][] = css/summon-solr-search.css
