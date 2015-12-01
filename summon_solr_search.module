@@ -1,0 +1,134 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for Summon Solr Search Module
+ *
+ * This module creates a search block allowing users to search multiple systems.
+ * It also creates a custom content type that stores information aobut the systems
+ * to be queried.
+ *
+ */
+ 
+ /**
+ * Implements hook_block_info(). It lets Drupal know what blocks we want to create.
+ */
+function summon_solr_search_block_info() {
+  $blocks = array();
+  $blocks['summon_solr_search_block'] = array(
+    'info' => t('A search box with options for systems to be searched'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+     
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view(). It returns the content for the blocks we created using
+ * hook_block_info().
+ */
+function bento_box_search_block_view($block_name = '') {
+  // Check which block is being requested
+  if ($block_name == 'summon_solr_search_block') {
+    
+    $block = array(
+      'content' => theme('summon_solr_search_form'), //use hook_theme provided by this module.
+    );
+    
+    return $block;
+  }
+}
+
+/**
+ * Implements hook_theme(). 
+ */
+function summon_solr_search_theme() {
+  return array(
+    'summon_solr_search_form' => array(
+      'path' => drupal_get_path('module', 'summon_solr_search').'/theme',
+      'template' => 'summon-solr-search-block', //see summon-solr-search-block.tpl.php
+    ),
+    'summon_solr_search_results' => array(
+      'path' => drupal_get_path('module', 'summon_solr_search').'/theme',
+      'template' => 'summon-solr-search-results-page', //see summon-solr-search-results-page.tpl.php
+    ),
+  );
+}
+
+/**
+ * Preprocess variables to be passed to the search block template assigned above in hook_theme().
+ */
+function template_preprocess_summon_solr_search_form(&$variables) {
+  $search_box = drupal_render (drupal_get_form('search_form'));
+  $variables['search_box'] = $search_box;
+}
+
+/**
+ * Preprocess variables to be passed to the results page template assigned above in hook_theme().
+ */
+function template_preprocess_summon_solr_search_results(&$variables) {
+  drupal_add_js(drupal_get_path('module', 'summon_solr_search') . '/js/summon_solr_search.js');
+}
+
+/**
+ * Implements hook_form() for Search Box in block.
+ */
+function search_form($form, &$form_state) {
+  $form['search_block_input'] = array(
+    '#type' => 'textfield',
+    '#required' => TRUE,
+  );
+  
+  $form['search_block_submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Search'),
+  );
+  
+  return $form;
+}
+
+/**
+ * Implements hook_form_submit(). Tells Drupal what to do once the search
+ * keywords have been successfully submitted.
+ */
+function search_form_submit($form, &$form_state) {
+  $_SESSION['summon_solr_search']['search_input'] = $form_state['values']['search_block_input'];
+  $form_state['redirect'] = 'onesearch_results/' . $form_state['values']['search_block_input'];
+}
+
+/**
+ * Implements hook_menu(). Creates the path for the results page and
+ * the individual query results for each facet.
+ */
+function summon_solr_search_menu() {
+  $menu['onesearch_results'] = array (
+    'title' => 'Search Results',
+    'page callback' => 'onesearch_results_page',
+    'access callback' => TRUE,
+  );
+  
+  $menu['onesearch_query/%/%'] = array (
+    'page callback' => 'onesearch_query_result',
+    'page arguments' => array(1,2),
+    'access callback' => TRUE,
+  );
+  
+  return $menu;
+}
+
+/**
+ * Callback function for search results page.
+ */
+function onesearch_results_page() {
+  $content = theme('summon_solr_search_results');
+  return $content;
+}
+
+/**
+ * Callback function for system query.
+ */
+function onesearch_query_result($nid, $keywords) {
+  $results_html = _process_system_query($id, $keywords);
+  print $results_html;
+  drupal_exit();
+}
