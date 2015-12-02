@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Install/uninstall hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function summon_solr_search_uninstall() {
+  $variables = array(
+    'summon_solr_search_solr_host',
+    'summon_solr_search_solr_port',
+    'summon_solr_search_solr_core',
+    'summon_solr_search_summon_access_id',
+    'summon_solr_search_summon_secret_key',
+  );
+  array_walk($variables, 'variable_del');
+}
