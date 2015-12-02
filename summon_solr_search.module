@@ -113,6 +113,15 @@ function summon_solr_search_menu() {
     'access callback' => TRUE,
   );
   
+  $menu['admin/config/search/summon_solr_search'] = array(
+    'title' => 'Summon Solr Search Settings',
+    'description' => 'Configure the Summon Solr Search module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('summon_solr_search_admin_form'),
+    'access arguments' => array('configure summon solr search settings'),
+    'file' => 'includes/admin.form.inc',
+  );
+  
   return $menu;
 }
 
