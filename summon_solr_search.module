@@ -68,6 +68,8 @@ function template_preprocess_summon_solr_search_form(&$variables) {
  */
 function template_preprocess_summon_solr_search_results(&$variables) {
   drupal_add_js(drupal_get_path('module', 'summon_solr_search') . '/js/summon_solr_search.js');
+  $variables['search_input'] = $_SESSION['summon_solr_search']['onesearch_input'];
+  
 }
 
 /**
@@ -136,7 +138,7 @@ function onesearch_results_page() {
 /**
  * Callback function for system query.
  */
-function onesearch_query_result($nid, $keywords) {
+function onesearch_query_result($id, $keywords) {
   $results_html = _process_system_query($id, $keywords);
   print $results_html;
   drupal_exit();
