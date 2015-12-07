@@ -9,8 +9,8 @@
  * Implements hook_schema().
  */
 function summon_solr_search_schema() {
-  $schema['redirect'] = array(
-    'description' => 'Stores information on redirects.',
+  $schema['summon_solr_search'] = array(
+    'description' => 'Stores information on queries.',
     'fields' => array(
       'id'  => array(
         'type' => 'serial',
@@ -27,7 +27,7 @@ function summon_solr_search_schema() {
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
-        'description' => 'The url to query for results.',
+        'description' => 'The URL to query for results.',
       ),
     ),
     'primary key' => array('id'),
@@ -40,7 +40,10 @@ function summon_solr_search_schema() {
  * Implements hook_install().
  */
 function summon_solr_search_install() {
-
+  db_insert('summon_solr_search')->fields(array(
+    'label' => 'All',
+    'query' => 'default',
+  ))->execute();
 }
 
 /**

@@ -119,9 +119,14 @@ function template_preprocess_summon_solr_search_results(&$variables) {
   drupal_add_js(drupal_get_path('module', 'summon_solr_search') . '/js/summon_solr_search.js');
   $variables['search_input'] = $_SESSION['summon_solr_search']['onesearch_input'];
   
-  drupal_add_js(array('summon_solr_search' => 
-      array($search_source->id => $bento_query_url)), 'setting');
+  $queries = db_select('summon_solr_search', 'c')->fields('c')->execute()->fetchAssoc();
+  $variables['queries'] = $queries;
   
+  foreach($queries as $query) {
+    //replace the keywords from the search into the search url
+    $query_url = $query['id'] . "|" . $variables['search_input'];
+    drupal_add_js(array('summon_solr_search' => array($query['id'] => $query_url)), 'setting');
+  }
 }
 
 /**
