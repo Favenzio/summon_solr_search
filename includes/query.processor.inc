@@ -15,5 +15,5 @@
  *   A result set object containing the list of search sources.
  */
 function _process_system_query($id, $keywords) {
-  
+  return "<h1>This is process_system_query</h1>";
 }

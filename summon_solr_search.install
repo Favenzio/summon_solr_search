@@ -6,6 +6,44 @@
  */
 
 /**
+ * Implements hook_schema().
+ */
+function summon_solr_search_schema() {
+  $schema['redirect'] = array(
+    'description' => 'Stores information on redirects.',
+    'fields' => array(
+      'id'  => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique ID.',
+      ),
+      'label' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'description' => 'A label for the search tab, i.e. Books.',
+      ),
+      'query' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'The url to query for results.',
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function summon_solr_search_install() {
+
+}
+
+/**
  * Implements hook_uninstall().
  */
 function summon_solr_search_uninstall() {

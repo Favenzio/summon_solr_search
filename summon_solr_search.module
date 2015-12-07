@@ -9,7 +9,56 @@
  * to be queried.
  *
  */
- 
+
+require_once drupal_get_path('module', 'summon_solr_search') . '/includes/query.processor.inc';
+
+/**
+ * Implements hook_menu(). Creates the path for the results page and
+ * the individual query results for each facet.
+ */
+function summon_solr_search_menu() {
+  $menu['onesearch_results'] = array (
+    'title' => 'Search Results',
+    'page callback' => 'onesearch_results_page',
+    'access callback' => TRUE,
+  );
+  
+  $menu['onesearch_query/%/%'] = array (
+    'page callback' => 'onesearch_query_result',
+    'page arguments' => array(1,2),
+    'access callback' => TRUE,
+  );
+  
+  $menu['admin/config/search/summon_solr_search'] = array(
+    'title' => 'Summon Solr Search Settings',
+    'description' => 'Configure the Summon Solr Search module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('summon_solr_search_admin_form'),
+    'access arguments' => array('configure summon solr search settings'),
+    'file' => 'includes/admin.form.inc',
+  );
+  
+  return $menu;
+}
+
+/**
+ * Callback function for search results page.
+ */
+function onesearch_results_page() {
+  $content = theme('summon_solr_search_results');
+  return $content;
+}
+
+/**
+ * Callback function for system query.
+ */
+function onesearch_query_result($id, $keywords) {
+  $results_html = _process_system_query($id, $keywords);
+  print $results_html;
+  drupal_exit();
+}
+
+
  /**
  * Implements hook_block_info(). It lets Drupal know what blocks we want to create.
  */
@@ -70,6 +119,9 @@ function template_preprocess_summon_solr_search_results(&$variables) {
   drupal_add_js(drupal_get_path('module', 'summon_solr_search') . '/js/summon_solr_search.js');
   $variables['search_input'] = $_SESSION['summon_solr_search']['onesearch_input'];
   
+  drupal_add_js(array('summon_solr_search' => 
+      array($search_source->id => $bento_query_url)), 'setting');
+  
 }
 
 /**
@@ -96,50 +148,4 @@ function onesearch_form($form, &$form_state) {
 function onesearch_form_submit($form, &$form_state) {
   $_SESSION['summon_solr_search']['onesearch_input'] = $form_state['values']['onesearch_block_input'];
   $form_state['redirect'] = 'onesearch_results/' . $form_state['values']['onesearch_block_input'];
-}
-
-/**
- * Implements hook_menu(). Creates the path for the results page and
- * the individual query results for each facet.
- */
-function summon_solr_search_menu() {
-  $menu['onesearch_results'] = array (
-    'title' => 'Search Results',
-    'page callback' => 'onesearch_results_page',
-    'access callback' => TRUE,
-  );
-  
-  $menu['onesearch_query/%/%'] = array (
-    'page callback' => 'onesearch_query_result',
-    'page arguments' => array(1,2),
-    'access callback' => TRUE,
-  );
-  
-  $menu['admin/config/search/summon_solr_search'] = array(
-    'title' => 'Summon Solr Search Settings',
-    'description' => 'Configure the Summon Solr Search module.',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('summon_solr_search_admin_form'),
-    'access arguments' => array('configure summon solr search settings'),
-    'file' => 'includes/admin.form.inc',
-  );
-  
-  return $menu;
-}
-
-/**
- * Callback function for search results page.
- */
-function onesearch_results_page() {
-  $content = theme('summon_solr_search_results');
-  return $content;
-}
-
-/**
- * Callback function for system query.
- */
-function onesearch_query_result($id, $keywords) {
-  $results_html = _process_system_query($id, $keywords);
-  print $results_html;
-  drupal_exit();
 }
