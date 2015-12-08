@@ -29,6 +29,12 @@ function summon_solr_search_schema() {
         'not null' => TRUE,
         'description' => 'The URL to query for results.',
       ),
+      'type' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'description' => 'Type of search, i.e. Summon or Solr.',
+      ),
     ),
     'primary key' => array('id'),
   );
@@ -43,6 +49,7 @@ function summon_solr_search_install() {
   db_insert('summon_solr_search')->fields(array(
     'label' => 'All',
     'query' => 'default',
+    'type' => 'blend',
   ))->execute();
 }
 
