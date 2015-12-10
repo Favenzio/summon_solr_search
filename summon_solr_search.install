@@ -63,6 +63,8 @@ function summon_solr_search_uninstall() {
     'summon_solr_search_solr_core',
     'summon_solr_search_summon_access_id',
     'summon_solr_search_summon_secret_key',
+    'summon_solr_search_summon_api_host',
+    'summon_solr_search_summon_api_path'
   );
   array_walk($variables, 'variable_del');
 }

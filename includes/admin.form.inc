@@ -47,7 +47,21 @@ function summon_solr_search_admin_form() {
     '#title' => t('Summon Secret Key'),
     '#description' => t('The Secret Key used to connect to Summon API'),
     '#default_value' => variable_get('summon_solr_search_summon_secret_key', ''),
-  );  
+  );
+  
+  $form['summon_solr_search_summon_api_host'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Summon Host URL'),
+    '#description' => t('The URL to query the Summon API'),
+    '#default_value' => variable_get('summon_solr_search_summon_api_host', 'api.summon.serialsolutions.com'),
+  );
+  
+  $form['summon_solr_search_summon_api_path'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Summon API Path'),
+    '#description' => t('The path to query from the Summon Host'),
+    '#default_value' => variable_get('summon_solr_search_summon_api_path', '/2.0.0/search'),
+  );
 
   $form['save_configuration'] = array(
     '#type' => 'submit',
@@ -71,4 +85,6 @@ function summon_solr_search_admin_form_submit($form, &$form_state) {
   variable_set('summon_solr_search_solr_core', $form_state['values']['summon_solr_search_solr_core']);
   variable_set('summon_solr_search_summon_access_id', $form_state['values']['summon_solr_search_summon_access_id']);
   variable_set('summon_solr_search_summon_secret_key', $form_state['values']['summon_solr_search_summon_secret_key']);
+  variable_set('summon_solr_search_summon_api_host', $form_state['values']['summon_solr_search_summon_api_host']);
+  variable_set('summon_solr_search_summon_api_path', $form_state['values']['summon_solr_search_summon_api_path']);
 }
