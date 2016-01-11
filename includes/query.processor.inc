@@ -62,13 +62,47 @@ function _default_query_handler($keywords) {
 
 function _results_array_to_html($results) {
   $html = '';
+  $type = '';
   
   foreach ($results as $result) {
-    $summary = substr(strip_tags($result['content']), 0, 300);
-    $html .= '<div id="summon-solr-result"><h3><a href="' . $result['url'] . '"><h3>';
-    $html .= $result[title] . '</a></h3>';
-    $html .= '<h5>' . $result['url'] . ' - ' . $result['type'] . '</h5>';
-    $html .= '<p>' . $summary . ' ...</p>';
+    if(isset($result['content'])) {
+      $summary = substr(strip_tags($result['content']), 0, 300) . '...';
+    }
+    
+    if($result['type'] == 'research_guide') {
+      $type = 'Research Guide';
+    }
+    elseif($result['type'] == 'basic_page') {
+      $type = 'Library Website';
+    }
+    elseif($result['type'] == 'service' || $result['type'] == 'policy') {
+      $type = 'Library Website';
+    }
+    else {
+      $type = $result['type'];
+    }
+    
+    $html .= '<div id="summon-solr-result"><h3><a href="' . $result['url'] . '">';
+    $html .= $result['title'] . '</a></h3>';
+
+    if(isset($result['author'])){
+      $html .= '<h5>' . $result['author'] . '</h5>';
+    }
+    
+    if(isset($result['content'])){
+      $html .= '<p>' . $summary . '</p>';
+    }
+    
+    $html .= '<h6>' . $type;
+    
+    if($result['full_text'] == 'true') {
+      $html .= ' - <a href="' . $result['url'] . '">Full Text Online</a>'; 
+    }
+    elseif (isset($result['subject_terms'])) {
+      $html .= ': ' . $result['subject_terms'];
+    }
+    
+    $html .= '</h6></div>';
   }
   
   return $html;

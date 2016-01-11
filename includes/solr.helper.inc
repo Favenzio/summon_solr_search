@@ -21,7 +21,8 @@ function _solr_title_search($solr_host, $solr_port, $solr_core, $keywords, &$ble
         'type' => $result->ss_type,
         'title' => $result->tm_title[0],
         'url' => $result->ss_url,
-        'content' => $result->content, 
+        'content' => $result->content,
+        'score' => $result->score,
       );
       
       $count++;
@@ -47,7 +48,8 @@ function _solr_generic_search($solr_host, $solr_port, $solr_core, $keywords, &$b
         'type' => $result->ss_type,
         'title' => $result->tm_title[0],
         'url' => $result->ss_url,
-        'content' => $result->content, 
+        'content' => $result->content,
+        'score' => $result->score,
       );
       
       $count++;
