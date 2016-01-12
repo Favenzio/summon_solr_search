@@ -46,11 +46,30 @@ function summon_solr_search_schema() {
  * Implements hook_install().
  */
 function summon_solr_search_install() {
-  db_insert('summon_solr_search')->fields(array(
-    'label' => 'All',
-    'query' => 'default',
-    'type' => 'blend',
-  ))->execute();
+
+  $values = array(
+    array(
+      'label' => 'All',
+      'query' => 'default',
+      'type' => 'blend',
+    ),
+    array(
+      'label' => 'Articles',
+      'query' => 'article',
+      'type' => 'blend',
+    ),
+    array(
+      'label' => 'Books',
+      'query' => 'book',
+      'type' => 'blend',
+    ),
+  );
+  
+  $query = db_insert('summon_solr_search')->fields(array('label', 'query', 'type'));
+  foreach ($values as $record) {
+    $query->values($record);
+  }
+  $query->execute();
 }
 
 /**

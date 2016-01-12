@@ -29,6 +29,10 @@ function _process_system_query($id, $keywords) {
     return _default_query_handler($keywords);
   }
   
+  if($query['query'] == 'article') {
+    return _article_query_handler($keywords);
+  }
+  
   return "<p>Query not found.</p>";
 }
 
@@ -60,6 +64,24 @@ function _default_query_handler($keywords) {
   return $results_html;
 }
 
+function _article_query_handler($keywords) {
+  $blended_results = array();
+  $parsed_keywords = str_replace(' ', '+', $keywords);
+  
+  $summon_auth_info = array(
+    'id' => variable_get('summon_solr_search_summon_access_id'),
+    'key' => variable_get('summon_solr_search_summon_secret_key'),
+    'host' => variable_get('summon_solr_search_summon_api_host'),
+    'path' => variable_get('summon_solr_search_summon_api_path'),
+  );
+  
+  _summon_article_search($summon_auth_info, $parsed_keywords, $blended_results);
+  
+  $results_html = _results_array_to_html($blended_results);
+  
+  return $results_html;
+}
+
 function _results_array_to_html($results) {
   $html = '';
   $type = '';
@@ -82,7 +104,7 @@ function _results_array_to_html($results) {
       $type = $result['type'];
     }
     
-    $html .= '<div id="summon-solr-result"><h3><a href="' . $result['url'] . '">';
+    $html .= '<div id="summon-solr-result"><h3><a href="' . $result['url'] . '" target="_blank">';
     $html .= $result['title'] . '</a></h3>';
 
     if(isset($result['author'])){
@@ -96,7 +118,7 @@ function _results_array_to_html($results) {
     $html .= '<h6>' . $type;
     
     if($result['full_text'] == 'true') {
-      $html .= ' - <a href="' . $result['url'] . '">Full Text Online</a>'; 
+      $html .= ' - <a href="' . $result['url'] . '" target = "_blank">Full Text Online</a>'; 
     }
     elseif (isset($result['subject_terms'])) {
       $html .= ': ' . $result['subject_terms'];

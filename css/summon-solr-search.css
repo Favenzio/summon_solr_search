@@ -1,3 +1,24 @@
 /* Summon Solr Search Cascading Style Sheet */
 
+div.summon-search-container { float: left; width: 100%; }
 div#summon-solr-result { margin-bottom: 25px; }
+div#summon-solr-result p { margin: 0; }
+div#summon-search-menu ul { 
+  width: 100%; 
+  margin-bottom: 20px; 
+  border-bottom: 1px solid #ccc;
+  float: left;
+}
+div#summon-search-menu ul li::before { content: none; }
+div#summon-search-menu ul li { float: left; margin: 0 5px 0 0; }
+div#summon-search-menu ul li a { 
+  display: block;  
+  font-weight: bold; 
+  padding: 0 10px 10px 10px; 
+  text-align: center;
+  color: black;
+}
+div#summon-search-menu ul li a.ss-active { 
+  border-bottom: 4px solid #247a35; 
+  color: #247a35; 
+}

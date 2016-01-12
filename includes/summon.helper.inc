@@ -19,9 +19,23 @@ function _summon_generic_search($auth_info, $keywords, &$blended_results) {
   $json = file_get_contents($summon_request);
   $results = json_decode($json);
   
-  /*print '<pre>';
-  print_r($results);
-  print '</pre>';*/
+  foreach ($results->documents as $result) {
+    $result_item = _create_result_item($result);    
+    $blended_results[] = $result_item;
+  }
+}
+
+function _summon_article_search($auth_info, $keywords, &$blended_results) {
+  
+  global $base_url;
+  
+  $summon_request = $base_url . '/cgi-bin/summon_connector.py?';
+  $summon_request .= 'id=' . $auth_info['id'];
+  $summon_request .= '&key=' . $auth_info['key'];
+  $summon_request .= '&st=article&kw=' . $keywords;
+  
+  $json = file_get_contents($summon_request);
+  $results = json_decode($json);
   
   foreach ($results->documents as $result) {
     $result_item = _create_result_item($result);    
