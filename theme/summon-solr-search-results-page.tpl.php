@@ -12,6 +12,10 @@ returned the following results:</p>
   <ul>
     <li><a id="summon-search-all" href="#" class="ss-active">All</a></li>  
     <li><a id="summon-search-articles" href="#">Articles</a></li>
+    <li><a id="summon-search-books" href="#">Books</a></li>
+    <li><a id="summon-search-journals" href="#">Journals</a></li>
+    <li><a id="summon-search-databases" href="#">Databases</a></li>
+    <li><a id="summon-search-website" href="#">Website</a></li>    
   </ul>
 </div>
 

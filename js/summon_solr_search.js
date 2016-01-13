@@ -35,10 +35,52 @@
           $.get(article_query_url, function( results_html ) {
             $('#' + temp_url[0]).append(results_html);
           });
-          
+        });      
+
+        //book search handler
+        $('#summon-search-books').click(function() {
+          $('#1').empty();
+          $("#summon-search-menu>ul>li>a.ss-active").removeClass("ss-active");
+          $("#summon-search-books").addClass("ss-active");
+          var article_query_url = '/onesearch_query/3/' + temp_url[1];
+          $.get(article_query_url, function( results_html ) {
+            $('#' + temp_url[0]).append(results_html);
+          });
         });
         
-     });      
+        //journal search handler
+        $('#summon-search-journals').click(function() {
+          $('#1').empty();
+          $("#summon-search-menu>ul>li>a.ss-active").removeClass("ss-active");
+          $("#summon-search-journals").addClass("ss-active");
+          var article_query_url = '/onesearch_query/4/' + temp_url[1];
+          $.get(article_query_url, function( results_html ) {
+            $('#' + temp_url[0]).append(results_html);
+          });
+        });
+        
+        //database search handler
+        $('#summon-search-databases').click(function() {
+          $('#1').empty();
+          $("#summon-search-menu>ul>li>a.ss-active").removeClass("ss-active");
+          $("#summon-search-databases").addClass("ss-active");
+          var article_query_url = '/onesearch_query/5/' + temp_url[1];
+          $.get(article_query_url, function( results_html ) {
+            $('#' + temp_url[0]).append(results_html);
+          });
+        });
+        
+        //website search handler
+        $('#summon-search-website').click(function() {
+          $('#1').empty();
+          $("#summon-search-menu>ul>li>a.ss-active").removeClass("ss-active");
+          $("#summon-search-website").addClass("ss-active");
+          var article_query_url = '/onesearch_query/6/' + temp_url[1];
+          $.get(article_query_url, function( results_html ) {
+            $('#' + temp_url[0]).append(results_html);
+          });
+        }); 
+      });
      // end our js code
     }
   };

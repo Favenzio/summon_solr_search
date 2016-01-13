@@ -25,14 +25,14 @@ function _summon_generic_search($auth_info, $keywords, &$blended_results) {
   }
 }
 
-function _summon_article_search($auth_info, $keywords, &$blended_results) {
+function _summon_content_type_search($type, $auth_info, $keywords, &$blended_results) {
   
   global $base_url;
   
   $summon_request = $base_url . '/cgi-bin/summon_connector.py?';
   $summon_request .= 'id=' . $auth_info['id'];
   $summon_request .= '&key=' . $auth_info['key'];
-  $summon_request .= '&st=article&kw=' . $keywords;
+  $summon_request .= '&st=' . $type . '&kw=' . $keywords;
   
   $json = file_get_contents($summon_request);
   $results = json_decode($json);

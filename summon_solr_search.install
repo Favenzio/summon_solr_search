@@ -63,6 +63,21 @@ function summon_solr_search_install() {
       'query' => 'book',
       'type' => 'blend',
     ),
+    array(
+      'label' => 'Journals',
+      'query' => 'journal',
+      'type' => 'blend',
+    ),
+    array(
+      'label' => 'Databases',
+      'query' => 'database',
+      'type' => 'blend',
+    ),
+    array(
+      'label' => 'Website',
+      'query' => 'website',
+      'type' => 'blend',
+    ),     
   );
   
   $query = db_insert('summon_solr_search')->fields(array('label', 'query', 'type'));
