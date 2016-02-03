@@ -27,3 +27,9 @@ div#more-results-link {
   margin-right: 30px;
 }
 .page-onesearch-results h1#page-title { display: none; } 
+
+/* Search block styles */
+.block-summon-solr-search-block { float: right; padding-right: 10px; width: 310px; display: inline; }
+input#edit-onesearch-block-input { width: 221px; }
+input#edit-onesearch-block-submit { float: right; margin-top: 7px; }
+div.form-item-onesearch-block-input { display: inline; }

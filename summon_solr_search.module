@@ -136,6 +136,9 @@ function onesearch_form($form, &$form_state) {
   $form['onesearch_block_input'] = array(
     '#type' => 'textfield',
     '#required' => TRUE,
+    '#attributes' => array(
+        'placeholder' => t('Try our new search...'),
+    ),
   );
   
   $form['onesearch_block_submit'] = array(
