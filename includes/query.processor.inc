@@ -28,23 +28,33 @@ function _process_system_query($id, $keywords) {
   $p_keywords = str_replace(' ', '+', $keywords);
   
   if($query['query'] == 'default') {
-    return _default_query_handler($p_keywords);
+    $results = _default_query_handler($p_keywords);
+    $more_results = _more_results_link('default', $p_keywords);
+    return $results . $more_results;
   }
   
   if($query['query'] == 'article') {
-    return _content_type_query_handler($p_keywords, $query['query']);
+    $results = _content_type_query_handler($p_keywords, $query['query']);
+    $more_results = _more_results_link('article', $p_keywords);
+    return $results . $more_results;
   }
   
   if($query['query'] == 'book') {
-    return _content_type_query_handler($p_keywords, $query['query']);
+    $results = _content_type_query_handler($p_keywords, $query['query']);
+    $more_results = _more_results_link('book', $p_keywords);
+    return $results . $more_results;  
   }
   
   if($query['query'] == 'journal') {
-    return _content_type_query_handler($p_keywords, $query['query']);
+    $results = _content_type_query_handler($p_keywords, $query['query']);
+    $more_results = _more_results_link('journal', $p_keywords);
+    return $results . $more_results;     
   }
   
   if($query['query'] == 'database') {
-    return _solr_query_handler($p_keywords, 'e_resource', false);
+    $results = _solr_query_handler($p_keywords, 'e_resource', false);
+    $more_results = _more_results_link('database', $p_keywords);
+    return $results . $more_results;    
   }
   
   if($query['query'] == 'website') {
@@ -174,4 +184,41 @@ function _results_array_to_html($results, $search_type) {
   }
   
   return $html;
+}
+
+function _more_results_link($query_type, $keywords) {
+  
+  if($query_type == 'default') {
+    $more_link = '<div id="more-results-link"><p><a href="' .
+      'http://fsu.summon.serialssolutions.com/#!/search?ho=t&l=en&q=' . $keywords .
+      '" target="_blank">See More Results...</a></p></div>';
+    return $more_link;
+  }
+  
+  if($query_type == 'article') {
+    $more_link = '<div id="more-results-link"><p><a href="' .
+      'http://fsu.summon.serialssolutions.com/#!/search?ho=t&fvf=IsPeerReviewed,true,f%7CContentType,Journal%20Article,f&l=en&q=' . 
+      $keywords .'" target="_blank">See More Results...</a></p></div>';
+    return $more_link;
+  }
+  
+  if($query_type == 'book') {
+    $more_link = '<div id="more-results-link"><p><a href="' .
+      'http://fsu.summon.serialssolutions.com/#!/search?ho=t&fvf=ContentType,Book%20%2F%20eBook,f&l=en&q=' . 
+      $keywords . '" target="_blank">See More Results...</a></p></div>';
+    return $more_link;
+  }
+  
+  if($query_type == 'journal') {
+    $more_link = '<div id="more-results-link"><p><a href="' .
+      'http://fsu.summon.serialssolutions.com/#!/search?ho=t&fvf=ContentType,Journal%20%2F%20eJournal,f&l=en&q=' . 
+      $keywords . '" target="_blank">See More Results...</a></p></div>';
+    return $more_link;
+  }
+  
+  if($query_type == 'database') {
+    $more_link = '<div id="more-results-link"><p>' .
+      '<a href="/eresources/az">Databases A thru Z</a></p></div>';
+    return $more_link;
+  }  
 }

@@ -22,3 +22,8 @@ div#summon-search-menu ul li a.ss-active {
   border-bottom: 4px solid #247a35; 
   color: #247a35; 
 }
+div#more-results-link {
+  float: right;
+  margin-right: 30px;
+}
+.page-onesearch-results h1#page-title { display: none; } 
