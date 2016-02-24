@@ -16,11 +16,11 @@
         });
         
         //all search handler
-        $('#summon-search-all').click(function() {
+        $('.summon-search-all').click(function() {
           $('#1').empty();
           $('#1').append('<div id="load-wait"><img src="/sites/all/modules/summon_solr_search/images/ajax-loader.gif"></div>');
-          $("#summon-search-menu>ul>li>a.ss-active").removeClass("ss-active");
-          $("#summon-search-all").addClass("ss-active");
+          $(".ss-active").removeClass("ss-active");
+          $(".summon-search-all").addClass("ss-active");
           var article_query_url = '/onesearch_query/1/' + temp_url[1];
           $.get(article_query_url, function( results_html ) {
             $('#' + temp_url[0]).append(results_html);
@@ -29,11 +29,11 @@
         });
         
         //article search handler
-        $('#summon-search-articles').click(function() {
+        $('.summon-search-articles').click(function() {
           $('#1').empty();
           $('#1').append('<div id="load-wait"><img src="/sites/all/modules/summon_solr_search/images/ajax-loader.gif"></div>');
-          $("#summon-search-menu>ul>li>a.ss-active").removeClass("ss-active");
-          $("#summon-search-articles").addClass("ss-active");
+          $(".ss-active").removeClass("ss-active");
+          $(".summon-search-articles").addClass("ss-active");
           var article_query_url = '/onesearch_query/2/' + temp_url[1];
           $.get(article_query_url, function( results_html ) {
             $('#' + temp_url[0]).append(results_html);
@@ -42,11 +42,11 @@
         });      
 
         //book search handler
-        $('#summon-search-books').click(function() {
+        $('.summon-search-books').click(function() {
           $('#1').empty();
           $('#1').append('<div id="load-wait"><img src="/sites/all/modules/summon_solr_search/images/ajax-loader.gif"></div>');
-          $("#summon-search-menu>ul>li>a.ss-active").removeClass("ss-active");
-          $("#summon-search-books").addClass("ss-active");
+          $(".ss-active").removeClass("ss-active");
+          $(".summon-search-books").addClass("ss-active");
           var article_query_url = '/onesearch_query/3/' + temp_url[1];
           $.get(article_query_url, function( results_html ) {
             $('#' + temp_url[0]).append(results_html);
@@ -55,11 +55,11 @@
         });
         
         //journal search handler
-        $('#summon-search-journals').click(function() {
+        $('.summon-search-journals').click(function() {
           $('#1').empty();
           $('#1').append('<div id="load-wait"><img src="/sites/all/modules/summon_solr_search/images/ajax-loader.gif"></div>');
-          $("#summon-search-menu>ul>li>a.ss-active").removeClass("ss-active");
-          $("#summon-search-journals").addClass("ss-active");
+          $(".ss-active").removeClass("ss-active");
+          $(".summon-search-journals").addClass("ss-active");
           var article_query_url = '/onesearch_query/4/' + temp_url[1];
           $.get(article_query_url, function( results_html ) {
             $('#' + temp_url[0]).append(results_html);
@@ -68,11 +68,11 @@
         });
         
         //database search handler
-        $('#summon-search-databases').click(function() {
+        $('.summon-search-databases').click(function() {
           $('#1').empty();
           $('#1').append('<div id="load-wait"><img src="/sites/all/modules/summon_solr_search/images/ajax-loader.gif"></div>');
-          $("#summon-search-menu>ul>li>a.ss-active").removeClass("ss-active");
-          $("#summon-search-databases").addClass("ss-active");
+          $(".ss-active").removeClass("ss-active");
+          $(".summon-search-databases").addClass("ss-active");
           var article_query_url = '/onesearch_query/5/' + temp_url[1];
           $.get(article_query_url, function( results_html ) {
             $('#' + temp_url[0]).append(results_html);
@@ -81,17 +81,39 @@
         });
         
         //website search handler
-        $('#summon-search-website').click(function() {
+        $('.summon-search-website').click(function() {
           $('#1').empty();
           $('#1').append('<div id="load-wait"><img src="/sites/all/modules/summon_solr_search/images/ajax-loader.gif"></div>');
-          $("#summon-search-menu>ul>li>a.ss-active").removeClass("ss-active");
-          $("#summon-search-website").addClass("ss-active");
+          $(".ss-active").removeClass("ss-active");
+          $(".summon-search-website").addClass("ss-active");
           var article_query_url = '/onesearch_query/6/' + temp_url[1];
           $.get(article_query_url, function( results_html ) {
             $('#' + temp_url[0]).append(results_html);
             $('#load-wait').empty();
           });
         }); 
+
+        //show mobile extended menu
+        $('.summon-search-more').unbind('click').click(function() {
+          if($("#ss-extended-menu").hasClass("ss-invisible")) {
+            $("#ss-extended-menu").removeClass("ss-invisible");
+       	    $("#ss-extended-menu").addClass("ss-visible");
+          } else {
+            $("#ss-extended-menu").removeClass("ss-visible");
+            $("#ss-extended-menu").addClass("ss-invisible");
+          }
+        });
+
+        //hide mobile extended menu
+        $(document).unbind('click').click(function(e) {
+          if($("#ss-extended-menu").hasClass("ss-visible")) {
+            if(!$(e.target).hasClass('summon-search-more')) {
+              $("#ss-extended-menu").removeClass("ss-visible");
+              $("#ss-extended-menu").addClass("ss-invisible");
+            }
+       	  }
+        });
+
       });
      // end our js code
     }

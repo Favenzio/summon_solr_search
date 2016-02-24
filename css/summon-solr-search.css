@@ -3,25 +3,46 @@
 div.summon-search-container { float: left; width: 100%; }
 div#summon-solr-result { margin-bottom: 25px; }
 div#summon-solr-result p { margin: 0; }
-div#summon-search-menu ul { 
+div.summon-search-menu ul { 
   width: 100%; 
   margin-bottom: 20px; 
   border-bottom: 1px solid #ccc;
   float: left;
 }
-div#summon-search-menu ul li::before { content: none; }
-div#summon-search-menu ul li { float: left; margin: 0 5px 0 0; }
-div#summon-search-menu ul li a { 
+div.summon-search-menu ul li a.ss-active {
+  border-bottom: 4px solid #247a35;
+  color: #247a35;
+}
+
+.ss-invisible { display: none; }
+
+/* Desktop menu specific styles */
+div#ss-menu-desktop ul li::before { content: none; }
+div#ss-menu-desktop ul li { float: left; margin: 0 5px 0 0; }
+div#ss-menu-desktop ul li a { 
   display: block;  
   font-weight: bold; 
   padding: 0 10px 10px 10px; 
   text-align: center;
   color: black;
 }
-div#summon-search-menu ul li a.ss-active { 
-  border-bottom: 4px solid #247a35; 
-  color: #247a35; 
+
+/* Mobile menu specific styles */
+div#ss-menu-mobile ul li::before { content: none; }
+div#ss-menu-mobile ul li { float: left; margin: 0 5px 0 0; }
+div#ss-menu-mobile ul li a {
+  display: block;
+  font-weight: bold; 
+  padding: 0 10px 10px 10px;
+  text-align: center;
+  color: black;
 }
+ul#ss-extended-menu { 
+  border: none; 
+  margin: 10px 0 0 0;
+}
+
+/* Results styles */
 div#more-results-link {
   float: right;
   margin-right: 30px;
@@ -33,3 +54,12 @@ div#more-results-link {
 input#edit-onesearch-block-input { width: 221px; }
 input#edit-onesearch-block-submit { float: right; margin-top: 7px; }
 div.form-item-onesearch-block-input { display: inline; }
+
+/* Media Queries for mobile display */
+@media (min-width: 800px) {
+  div#ss-menu-mobile { display: none; }
+}
+
+@media (max-width: 799px) {
+  div#ss-menu-desktop { display: none; }
+}
