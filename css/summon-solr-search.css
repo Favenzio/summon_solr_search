@@ -42,6 +42,8 @@ ul#ss-extended-menu {
   margin: 10px 0 0 0;
 }
 
+div#ss-menu-mobile ul li.ss-extended { margin: 0 5px 12px 0; }
+
 /* Results styles */
 div#more-results-link {
   float: right;

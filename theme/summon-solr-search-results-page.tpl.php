@@ -26,9 +26,9 @@ returned the following results:</p>
     <li><a class="summon-search-books" href="#">Books</a></li>
     <li><a class="summon-search-more" href="#">More...</a></li>
     <ul id="ss-extended-menu" class="ss-invisible">
-      <li><a class="summon-search-journals" href="#">Journals</a></li>
-      <li><a class="summon-search-databases" href="#">Databases</a></li>
-      <li><a class="summon-search-website" href="#">Website & Research Guides</a></li>
+      <li class="ss-extended"><a class="summon-search-journals" href="#">Journals</a></li>
+      <li class="ss-extended"><a class="summon-search-databases" href="#">Databases</a></li>
+      <li class="ss-extended"><a class="summon-search-website" href="#">Website & Research Guides</a></li>
     </ul>
   </ul>
 </div>
