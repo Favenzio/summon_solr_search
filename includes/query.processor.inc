@@ -84,9 +84,11 @@ function _default_query_handler($keywords) {
     _solr_generic_search(0.7, $solr_host, $solr_port, $solr_core, $keywords, $blended_results);
   }
   
+  $n_web_results = count($blended_results);
+
   _summon_generic_search($summon_auth_info, $keywords, $blended_results);
   
-  $results_html = _results_array_to_html($blended_results, 'default');
+  $results_html = _results_array_to_html($blended_results, 'default', $n_web_results);
   
   return $results_html;
 }
@@ -106,7 +108,7 @@ function _solr_query_handler($keywords, $type, $remove) {
       $solr_core, $keywords, $blended_results); 
   }
   
-  $results_html = _results_array_to_html($blended_results, $type);
+  $results_html = _results_array_to_html($blended_results, $type, 0);
   
   return $results_html;
 }
@@ -123,14 +125,15 @@ function _content_type_query_handler($keywords, $type) {
   
   _summon_content_type_search($type, $summon_auth_info, $keywords, $blended_results);
   
-  $results_html = _results_array_to_html($blended_results, $type);
+  $results_html = _results_array_to_html($blended_results, $type, 0);
   
   return $results_html;
 }
 
-function _results_array_to_html($results, $search_type) {
+function _results_array_to_html($results, $search_type, $n_web_results) {
   $html = '';
   $type = '';
+  $result_count = 1;
   
   if (count($results) == 0) {
     $html = '<h5>No records found. Please enter different keywords and try again.</h5>';
@@ -181,6 +184,12 @@ function _results_array_to_html($results, $search_type) {
     }
     
     $html .= '</h6></div>';
+
+    if($n_web_results != 0 && $result_count == $n_web_results) {
+      $html .= '<p id="in-house-content"><a class="summon-search-website" href="#">More FSU Libraries Content</a></p>';
+    }
+  
+    $result_count++;
   }
   
   return $html;

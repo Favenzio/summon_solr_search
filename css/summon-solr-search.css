@@ -50,6 +50,9 @@ div#more-results-link {
   margin-right: 30px;
 }
 .page-onesearch-results h1#page-title { display: none; } 
+p#in-house-content { padding-left: 35px; }
+p#in-house-content a { font-size: 120%; color: #025813; text-decoration: none; }
+div.summon-search-container h6 { font-weight: bold; }
 
 /* Search block styles */
 .block-summon-solr-search-block { float: right; padding-right: 10px; width: 310px; display: inline; }
