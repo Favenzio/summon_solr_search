@@ -200,28 +200,28 @@ function _more_results_link($query_type, $keywords) {
   if($query_type == 'default') {
     $more_link = '<div id="more-results-link"><p><a href="' .
       'http://fsu.summon.serialssolutions.com/#!/search?ho=t&l=en&q=' . $keywords .
-      '" target="_blank">See More Results...</a></p></div>';
+      '" target="_blank">Refine your search</a></p></div>';
     return $more_link;
   }
   
   if($query_type == 'article') {
     $more_link = '<div id="more-results-link"><p><a href="' .
       'http://fsu.summon.serialssolutions.com/#!/search?ho=t&fvf=IsPeerReviewed,true,f%7CContentType,Journal%20Article,f&l=en&q=' . 
-      $keywords .'" target="_blank">See More Results...</a></p></div>';
+      $keywords .'" target="_blank">Refine your search</a></p></div>';
     return $more_link;
   }
   
   if($query_type == 'book') {
     $more_link = '<div id="more-results-link"><p><a href="' .
       'http://fsu.summon.serialssolutions.com/#!/search?ho=t&fvf=ContentType,Book%20%2F%20eBook,f&l=en&q=' . 
-      $keywords . '" target="_blank">See More Results...</a></p></div>';
+      $keywords . '" target="_blank">Refine your search</a></p></div>';
     return $more_link;
   }
   
   if($query_type == 'journal') {
     $more_link = '<div id="more-results-link"><p><a href="' .
       'http://fsu.summon.serialssolutions.com/#!/search?ho=t&fvf=ContentType,Journal%20%2F%20eJournal,f&l=en&q=' . 
-      $keywords . '" target="_blank">See More Results...</a></p></div>';
+      $keywords . '" target="_blank">Refine your search</a></p></div>';
     return $more_link;
   }
   
