@@ -155,7 +155,10 @@ function _results_array_to_html($results, $search_type, $n_web_results) {
     }
     elseif($result['type'] == 'e_resource') {
       $type = 'Database';
-    }    
+    }
+    elseif($result['type'] == 'staff_profile') {
+      $type = 'Staff Profile';
+    } 
     elseif($result['type'] == 'service' || $result['type'] == 'policy') {
       $type = 'Library Website';
     }
