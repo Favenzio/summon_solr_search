@@ -78,9 +78,9 @@ function _default_query_handler($keywords) {
     'path' => variable_get('summon_solr_search_summon_api_path'),
   );
   
-  _solr_title_search(1.5, 2, $solr_host, $solr_port, $solr_core, $keywords, $blended_results); 
+  _solr_title_search(1.5, 3, $solr_host, $solr_port, $solr_core, $keywords, $blended_results); 
   
-  if(count($blended_results) < 2) {
+  if(count($blended_results) < 3) {
     _solr_generic_search(0.7, $solr_host, $solr_port, $solr_core, $keywords, $blended_results);
   }
   
