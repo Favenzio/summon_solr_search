@@ -7,8 +7,21 @@
     attach: function (context, settings) {            
       // All our js code here
       $.each(Drupal.settings.summon_solr_search, function(index, id_keywords) {
-        var temp_url = id_keywords.split("|"); 
+        var temp_url = id_keywords.split("|");
         var onesearch_query_url = '/onesearch_query/' + temp_url[0] + '/' + temp_url[1];
+
+        if (temp_url[2] == 'database') {
+          var onesearch_query_url = '/onesearch_query/5/' + temp_url[1];
+          $(".ss-active").removeClass("ss-active");
+          $(".summon-search-databases").addClass("ss-active");
+        }
+
+        if (temp_url[2] == 'website') {
+          var onesearch_query_url = '/onesearch_query/6/' + temp_url[1];
+          $(".ss-active").removeClass("ss-active");
+          $(".summon-search-website").addClass("ss-active");
+        }
+
         $('#edit-onesearch-block-input').val(temp_url[1]);
         $.get(onesearch_query_url, function( results_html ) {
           $('#' + temp_url[0]).append(results_html);
