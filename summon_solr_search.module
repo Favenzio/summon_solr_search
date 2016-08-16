@@ -151,6 +151,8 @@ function onesearch_form($form, &$form_state) {
     '#type' => 'hidden',
   );
 
+  $form['#token'] = FALSE;
+  
   return $form;
 }
 
