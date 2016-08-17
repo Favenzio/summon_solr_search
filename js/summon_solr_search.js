@@ -144,9 +144,7 @@
      // end our js code
     }
   };
-
-
   
 })(jQuery);
- 
+
 

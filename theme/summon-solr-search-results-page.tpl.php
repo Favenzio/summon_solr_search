@@ -5,8 +5,13 @@
  */
 ?>
 
-<p>Your search for <strong><?php print $search_input; ?></strong>
-returned the following results:</p>
+<form action="/" method="post" id="onesearch-inline-form" accept-charset="UTF-8">
+  <input placeholder="<?php print $search_input; ?>" type="text" name="onesearch_block_input" 
+    value="" size="25" maxlength="128" class="form-text required" />
+  <input type="submit" class="edit-onesearch-block-submit" name="op" value="Search" class="form-submit" />
+  <input type="hidden" name="onesearch_block_type" value="all" />
+  <input type="hidden" name="form_id" value="onesearch_form" />
+</form>
 
 <div class="summon-search-menu" id="ss-menu-desktop">
   <ul>

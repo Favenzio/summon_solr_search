@@ -14,6 +14,9 @@ div.summon-search-menu ul li a.ss-active {
   color: #247a35;
 }
 
+#onesearch-inline-form {
+  margin-bottom: 20px;
+}
 .ss-invisible { display: none; }
 
 /* Desktop menu specific styles */
