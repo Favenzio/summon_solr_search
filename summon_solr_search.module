@@ -151,8 +151,11 @@ function onesearch_form($form, &$form_state) {
     '#type' => 'hidden',
   );
 
-  //$form['#token'] = FALSE;
-  
+  global $user;
+  if ($user->uid > 0) {
+    $form['#token'] = FALSE;
+  }
+
   return $form;
 }
 
