@@ -136,6 +136,7 @@ function template_preprocess_summon_solr_search_results(&$variables) {
 function onesearch_form($form, &$form_state) {
   $form['onesearch_block_input'] = array(
     '#type' => 'textfield',
+    '#title' => t('Search Articles, Books and More...'),
     '#required' => TRUE,
     '#attributes' => array(
         'placeholder' => t('Search Articles, Books & More...'),
