@@ -108,7 +108,8 @@ function summon_solr_search_theme() {
  * Preprocess variables to be passed to the search block template assigned above in hook_theme().
  */
 function template_preprocess_summon_solr_search_form(&$variables) {
-  $search_box = drupal_render (drupal_get_form('onesearch_form'));
+  $form = drupal_get_form('onesearch_form');
+  $search_box = drupal_render ($form);
   $variables['search_box'] = $search_box;
 }
 

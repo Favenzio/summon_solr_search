@@ -179,7 +179,7 @@ function _results_array_to_html($results, $search_type, $n_web_results) {
     
     $html .= '<h6>' . $type;
     
-    if($result['full_text'] == 'true') {
+    if(array_key_exists('full_text', $result) && $result['full_text'] == 'true') {
       $html .= ' - <a href="' . $result['url'] . '" target = "_blank">Full Text Online</a>'; 
     }
     elseif (isset($result['subject_terms'])) {
@@ -189,7 +189,10 @@ function _results_array_to_html($results, $search_type, $n_web_results) {
     $html .= '</h6></div>';
 
     if($n_web_results != 0 && $result_count == $n_web_results) {
-      $html .= '<p id="in-house-content"><a class="summon-search-website" href="#">More FSU Libraries Content</a></p>';
+      $html .= '<p id="in-house-content" class="tooltip-link" data-tooltip-text=';
+      $html .= '"The results above this line come from our website and research guides. Follow this link to see more from these sources.">';
+      $html .= '<span class="fa fa-icon-tooltip fa-question-circle-o">&nbsp;</span>';
+      $html .= '<a class="summon-search-website" href="#">More Website and Research Guide Results ⇢</a></p>';
     }
   
     $result_count++;
@@ -201,36 +204,50 @@ function _results_array_to_html($results, $search_type, $n_web_results) {
 function _more_results_link($query_type, $keywords) {
   
   if($query_type == 'default') {
-    $more_link = '<div id="more-results-link"><p><a href="' .
-      'http://fsu.summon.serialssolutions.com/#!/search?ho=t&l=en&q=' . $keywords .
-      '" target="_blank">Refine your search</a></p></div>';
+    $link = 'http://fsu.summon.serialssolutions.com/#!/search?ho=t&l=en&q=' . $keywords;
+    $more_link = '<p id="ss-more-results" class="tooltip-link" data-tooltip-text=';
+    $more_link .= '"Not finding what you are looking for? Follow this link for more results and additional filtering options.">';
+    $more_link .= '<span class="fa fa-icon-tooltip fa-question-circle-o">&nbsp;</span>';
+    $more_link .= '<a href="' . $link . '">See More OneSearch Results ⇢</a></p>';
+    
     return $more_link;
   }
   
   if($query_type == 'article') {
-    $more_link = '<div id="more-results-link"><p><a href="' .
-      'http://fsu.summon.serialssolutions.com/#!/search?ho=t&fvf=IsPeerReviewed,true,f%7CContentType,Journal%20Article,f&l=en&q=' . 
-      $keywords .'" target="_blank">Refine your search</a></p></div>';
-    return $more_link;
+    $link = 'http://fsu.summon.serialssolutions.com/#!/search?ho=t&fvf=IsPeerReviewed,true,f%7CContentType,Journal%20Article,f&l=en&q=' . $keywords;
+    $more_link = '<p id="ss-more-results" class="tooltip-link" data-tooltip-text=';
+    $more_link .= '"Not finding what you are looking for? Follow this link for more results and additional filtering options.">';
+    $more_link .= '<span class="fa fa-icon-tooltip fa-question-circle-o">&nbsp;</span>';
+    $more_link .= '<a href="' . $link . '">See More OneSearch Results ⇢</a></p>';
+    
+    return $more_link;    
   }
   
   if($query_type == 'book') {
-    $more_link = '<div id="more-results-link"><p><a href="' .
-      'http://fsu.summon.serialssolutions.com/#!/search?ho=t&fvf=ContentType,Book%20%2F%20eBook,f&l=en&q=' . 
-      $keywords . '" target="_blank">Refine your search</a></p></div>';
-    return $more_link;
+    $link = 'https://fsu.catalog.fcla.edu/fs.jsp?st=' . $keywords . '&ix=kw&fl=bo';
+    $more_link = '<p id="ss-more-results" class="tooltip-link" data-tooltip-text=';
+    $more_link .= '"Not finding what you are looking for? Follow this link for more results and additional filtering options.">';
+    $more_link .= '<span class="fa fa-icon-tooltip fa-question-circle-o">&nbsp;</span>';
+    $more_link .= '<a href="' . $link . '">See More FSU Catalog Results ⇢</a></p>';
+    
+    return $more_link;      
   }
   
   if($query_type == 'journal') {
-    $more_link = '<div id="more-results-link"><p><a href="' .
-      'http://fsu.summon.serialssolutions.com/#!/search?ho=t&fvf=ContentType,Journal%20%2F%20eJournal,f&l=en&q=' . 
-      $keywords . '" target="_blank">Refine your search</a></p></div>';
-    return $more_link;
+    $link = 'http://fsu.summon.serialssolutions.com/#!/search?ho=t&fvf=ContentType,Journal%20%2F%20eJournal,f&l=en&q=' . $keywords;
+    $more_link = '<p id="ss-more-results" class="tooltip-link" data-tooltip-text=';
+    $more_link .= '"Not finding what you are looking for? Follow this link for more results and additional filtering options.">';
+    $more_link .= '<span class="fa fa-icon-tooltip fa-question-circle-o">&nbsp;</span>';
+    $more_link .= '<a href="' . $link . '">See More OneSearch Results ⇢</a></p>';
+    
+    return $more_link; 
   }
   
   if($query_type == 'database') {
-    $more_link = '<div id="more-results-link"><p>' .
-      '<a href="/eresources/az">Databases A thru Z</a></p></div>';
+    $more_link = '<p id="ss-more-results" class="tooltip-link" data-tooltip-text=';
+    $more_link .= '"Not finding what you are looking for? Follow this link for a different way to search for databases.">';
+    $more_link .= '<span class="fa fa-icon-tooltip fa-question-circle-o">&nbsp;</span>';    
+    $more_link .= '<a href="/eresources/az">Databases A thru Z</a></p>';
     return $more_link;
   }  
 }
