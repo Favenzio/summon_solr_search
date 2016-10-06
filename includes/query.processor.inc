@@ -155,6 +155,7 @@ function _results_array_to_html($results, $search_type, $n_web_results) {
     }
     elseif($result['type'] == 'e_resource') {
       $type = 'Database';
+      $result['url'] = _replace_database_url($result['url']);
     }
     elseif($result['type'] == 'staff_profile') {
       $type = 'Staff Profile';
@@ -199,6 +200,26 @@ function _results_array_to_html($results, $search_type, $n_web_results) {
   }
   
   return $html;
+}
+
+function _replace_database_url($node_url) {
+  $parsed_url = parse_url($node_url);
+  $alias = substr($parsed_url['path'], 1);
+  $path = drupal_lookup_path("source", $alias);
+  
+  if ($path) {
+    $node = menu_get_object("node", 1, $path);
+  } 
+  
+  if ($node->field_resource_url) {
+    $database_url = $node->field_resource_url[LANGUAGE_NONE][0]['value'];
+
+    if(filter_var($database_url, FILTER_VALIDATE_URL) !== false) {
+      return $database_url;
+    }
+  }
+
+  return $node_url;
 }
 
 function _more_results_link($query_type, $keywords) {
