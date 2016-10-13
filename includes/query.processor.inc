@@ -155,6 +155,7 @@ function _results_array_to_html($results, $search_type, $n_web_results) {
     }
     elseif($result['type'] == 'e_resource') {
       $type = 'Database';
+      $result['info_url'] = $result['url'];
       $result['url'] = _replace_database_url($result['url']);
     }
     elseif($result['type'] == 'staff_profile') {
@@ -168,7 +169,13 @@ function _results_array_to_html($results, $search_type, $n_web_results) {
     }
     
     $html .= '<div id="summon-solr-result"><h3><a href="' . $result['url'] . '" target="_blank">';
-    $html .= $result['title'] . '</a></h3>';
+    $html .= $result['title'] . '</a>';
+    
+    if(array_key_exists('info_url', $result)) {
+      $html .= '&nbsp;&nbsp;<a href="' . $result['info_url'] . '"><span class="fa fa-icon-tooltip fa-info-circle">&nbsp;</span></a>'; 
+    }
+    
+    $html .= '</h3>';
 
     if(isset($result['author'])){
       $html .= '<h5>' . $result['author'] . '</h5>';
