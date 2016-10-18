@@ -219,10 +219,10 @@ function _replace_database_url($node_url) {
   } 
   
   if ($node->field_resource_url) {
-    $database_url = $node->field_resource_url[LANGUAGE_NONE][0]['value'];
+    $database_abbreviation = $node->field_abbreviation[LANGUAGE_NONE][0]['value'];
 
-    if(filter_var($database_url, FILTER_VALIDATE_URL) !== false) {
-      return $database_url;
+    if($database_abbreviation !== false) {
+      return '/get/' . $database_abbreviation;
     }
   }
 
