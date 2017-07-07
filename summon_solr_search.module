@@ -126,8 +126,8 @@ function template_preprocess_summon_solr_search_results(&$variables) {
   
   foreach($queries as $query) {
     //replace the keywords from the search into the search url
-    $query_url = $query['id'] . "|" . $variables['search_input'] . "|" . $variables['search_type'];
-    drupal_add_js(array('summon_solr_search' => array($query['id'] => $query_url)), 'setting');
+    $query_url = @$query['id'] . "|" . $variables['search_input'] . "|" . $variables['search_type'];
+    drupal_add_js(array('summon_solr_search' => array(@$query['id'] => $query_url)), 'setting');
   }
 }
 
