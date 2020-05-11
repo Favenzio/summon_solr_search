@@ -63,8 +63,8 @@ function _solr_type_search($type, $n_results, $solr_host, $solr_port,
 $solr_core, $keywords, &$blended_results) {
   $count = 0;  
   $filter = 'http://' . $solr_host . ':' . $solr_port . '/solr/' . $solr_core
-    .'/select?q=tm_title%3A' . $keywords . '+AND+ss_type%3A' . $type 
-    . '&fl=score%2Css_url%2Css_type%2Ctm_title%2Ccontent&wt=json&indent=true';
+    .'/select?q=' . $keywords . '&fq=ss_type%3A' . $type 
+    . '&wt=json&indent=true';
   
   $title_search_results = json_decode(file_get_contents($filter));
   
