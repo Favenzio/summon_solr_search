@@ -31,16 +31,8 @@
 
         //database search handler
         $('.summon-search-databases').click(function() {
-          $('#1').empty();
-          $('#1').append('<div id="load-wait"><img src="/sites/all/modules/summon_solr_search/images/ajax-loader.gif"></div>');
-          $(".ss-active").removeClass("ss-active");
-          $(".summon-search-databases").addClass("ss-active");
-          var article_query_url = '/onesearch_query/5/' + temp_url[1];
-          $.get(article_query_url, function( results_html ) {
-            $('#' + temp_url[0]).append(results_html);
-            $('#load-wait').empty();
-            fsuthemeTooltip($);
-          });
+          var query_url = 'https://guides.lib.fsu.edu/az.php?q=' + temp_url[1];
+	  window.location = query_url;
         });
 
 	//website search handler
